@@ -512,6 +512,13 @@ endif
 	$(call MAROC_COPY_PKG_TO_SYSDRV_OUTPUT, $(OUTPUT_BOARD_BIN_PATH), \
 		$(SYSDRV_DIR_OUT_BOARD)/$(KERNEL_DTS:dts=dtb) $(SYSDRV_DIR_OUT_BOARD)/vmlinux)
 
+	# Build RTL8188 WIFI USB driver
+	$(MAKE) KSRC=$(SYSDRV_KERNEL_OBJS_OUTPUT_DIR) ARCH=$(ARCH) \
+		CROSS_COMPILE=$(CROSS_COMPILE) USER_EXTRA_CFLAGS="-Wno-implicit-fallthrough -Wno-vla -Wno-incompatible-pointer-types"\
+		-C $(KERNEL_DIR)/drivers/net/wireless/rockchip_wlan/rtl8188fu modules -j8|| exit 1
+	
+	cp $(KERNEL_DIR)/drivers/net/wireless/rockchip_wlan/rtl8188fu/8188fu.ko $(SYSDRV_DIR)/source/buildroot_overlay/root
+
 kernel_clean:
 	$(MAKE) O=$(SYSDRV_KERNEL_OBJS_OUTPUT_DIR) -C $(KERNEL_DIR) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) distclean
 	@-rm -rf $(SYSDRV_DIR)/source/objs_*

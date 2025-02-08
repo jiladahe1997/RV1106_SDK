@@ -25,7 +25,7 @@ int platform_wifi_power_on(void)
 {
 	int ret = 0;
 
-	rockchip_wifi_power(1);
+	// rockchip_wifi_power(1);
 	//oob_irq = rockchip_wifi_get_oob_irq();
 
 	return ret;
