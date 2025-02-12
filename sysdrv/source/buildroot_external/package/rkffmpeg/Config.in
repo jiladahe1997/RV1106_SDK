@@ -1,0 +1,4 @@
+config BR2_PACKAGE_RKFFMPEG
+        bool "rkffmpeg"
+        help
+            rockchip rkffmpeg

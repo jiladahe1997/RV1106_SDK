@@ -1,0 +1,4 @@
+config BR2_PACKAGE_RKMPP
+        bool "rkmpp"
+        help
+            rockchip mpp

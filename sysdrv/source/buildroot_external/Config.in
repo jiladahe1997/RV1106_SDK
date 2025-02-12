@@ -1,0 +1,3 @@
+source "$BR2_EXTERNAL_RV1106_PATH/package/rkmpp/Config.in"
+source "$BR2_EXTERNAL_RV1106_PATH/package/rkrga/Config.in"
+source "$BR2_EXTERNAL_RV1106_PATH/package/rkffmpeg/Config.in"
