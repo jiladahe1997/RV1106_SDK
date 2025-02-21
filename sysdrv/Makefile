@@ -513,6 +513,12 @@ endif
 		$(SYSDRV_DIR_OUT_BOARD)/$(KERNEL_DTS:dts=dtb) $(SYSDRV_DIR_OUT_BOARD)/vmlinux)
 
 	# Build RTL8188 WIFI USB driver
+
+	# must build kernel modules first
+	$(MAKE) -C $(KERNEL_DIR) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -j$(SYSDRV_JOBS) \
+			O=$(SYSDRV_KERNEL_OBJS_OUTPUT_DIR) \
+		modules
+
 	$(MAKE) KSRC=$(SYSDRV_KERNEL_OBJS_OUTPUT_DIR) ARCH=$(ARCH) \
 		CROSS_COMPILE=$(CROSS_COMPILE) USER_EXTRA_CFLAGS="-Wno-implicit-fallthrough -Wno-vla -Wno-incompatible-pointer-types"\
 		-C $(KERNEL_DIR)/drivers/net/wireless/rockchip_wlan/rtl8188fu modules -j8|| exit 1
